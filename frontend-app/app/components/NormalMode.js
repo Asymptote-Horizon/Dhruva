@@ -11,7 +11,7 @@ const CITIES = ["Pune", "Mumbai", "Delhi", "Bangalore"];
 /* Dynamic import for Map (no SSR for Leaflet) */
 const MapView = dynamic(() => import("./MapView"), { ssr: false });
 
-export default function NormalMode({ onBack }) {
+export default function NormalMode({ onBack, onSwitchToGame }) {
   const [city, setCity] = useState("Pune");
   const [places, setPlaces] = useState(PLACES.Pune || []);
   const [weather, setWeather] = useState(WEATHER.Pune);
@@ -122,9 +122,19 @@ export default function NormalMode({ onBack }) {
       {/* ── Sidebar ── */}
       <aside className={styles.sidebar}>
         <div className={styles.sideTop}>
-          <button className={styles.backBtn} onClick={onBack}>
-            ← Menu
+          <button className={styles.backBtn} onClick={onBack} aria-label="Return to intro">
+            ← Intro
           </button>
+          {onSwitchToGame && (
+            <button
+              className={styles.backBtn}
+              onClick={onSwitchToGame}
+              style={{ borderColor: "var(--gold)", color: "var(--gold)" }}
+              aria-label="Switch to Game Odyssey"
+            >
+              ⚔️ Game
+            </button>
+          )}
           <div className={styles.brand}>
             <span className={styles.brandIcon}>🧭</span>
             <span className={styles.brandName}>Dhruva</span>

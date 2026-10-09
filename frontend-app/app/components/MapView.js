@@ -106,3 +106,4 @@ export default function MapView({ places, city, onSelectPlace }) {
       aria-label="Interactive Leaflet map displaying city safety telemetry markers"
     />
   );
+}

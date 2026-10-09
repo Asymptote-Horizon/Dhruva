@@ -8,8 +8,8 @@ const API = process.env.NEXT_PUBLIC_API_URL || "";
 
 const CITIES = ["Pune", "Mumbai", "Delhi", "Bangalore"];
 
-export default function GameMode({ onBack }) {
-  const [phase, setPhase] = useState("intro"); // intro, city-select, dashboard
+export default function GameMode({ onBack, onSwitchToNormal, initialPhase = "city-select" }) {
+  const [phase, setPhase] = useState(initialPhase); // intro, city-select, dashboard
   const [city, setCity] = useState("Pune");
   const [places, setPlaces] = useState(PLACES.Pune || []);
   const [leaderboard, setLeaderboard] = useState(LEADERBOARD);

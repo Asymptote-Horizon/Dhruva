@@ -1,0 +1,261 @@
+.container {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #000;
+  overflow: hidden;
+  color: #e9eef7;
+  font-family: var(--font-outfit), "Palatino Linotype", Georgia, serif;
+  z-index: 50;
+  user-select: none;
+  touch-action: none;
+}
+
+.canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.canvasGlitch {
+  animation: glitch 0.7s steps(1) 1;
+}
+
+@keyframes glitch {
+  0% { transform: translate(0, 0); filter: none; opacity: 1; }
+  12% { transform: translate(-8px, 2px); filter: hue-rotate(80deg) contrast(1.6); opacity: 0.6; }
+  24% { transform: translate(6px, -3px); filter: invert(1) contrast(2); opacity: 0.9; }
+  36% { transform: translate(0, 0); filter: none; opacity: 0; }
+  52% { transform: translate(10px, 0); filter: hue-rotate(-60deg) saturate(2); opacity: 0.7; }
+  68% { transform: translate(-4px, 4px); filter: contrast(2); opacity: 0.3; }
+  84% { transform: translate(2px, 0); filter: none; opacity: 0.8; }
+  100% { transform: translate(0, 0); filter: none; opacity: 1; }
+}
+
+/* Gate Overlay */
+.gate {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  background: #000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  text-align: center;
+  padding: 24px;
+  transition: opacity 0.6s ease, visibility 0.6s ease;
+}
+
+.gateOff {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.gateTitle {
+  font-weight: 300;
+  font-size: clamp(26px, 5vw, 40px);
+  letter-spacing: 0.08em;
+  color: #fff;
+}
+
+.gateDesc {
+  color: #8d98ab;
+  font-size: clamp(14px, 2vw, 16px);
+  max-width: 38ch;
+  line-height: 1.6;
+}
+
+.gateButtons {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 8px;
+}
+
+.gateBtn {
+  font: inherit;
+  cursor: pointer;
+  color: #e9eef7;
+  background: rgba(188, 212, 255, 0.04);
+  border: 1px solid rgba(233, 238, 247, 0.35);
+  padding: 13px 30px;
+  border-radius: 4px;
+  font-size: 16px;
+  letter-spacing: 0.05em;
+  transition: all 0.25s ease;
+}
+
+.gateBtn:hover, .gateBtn:focus-visible {
+  background: rgba(188, 212, 255, 0.16);
+  border-color: #bcd4ff;
+  box-shadow: 0 0 16px rgba(188, 212, 255, 0.2);
+  outline: none;
+}
+
+.gateBtnPrimary {
+  border-color: #bcd4ff;
+  background: rgba(188, 212, 255, 0.1);
+  box-shadow: 0 0 12px rgba(188, 212, 255, 0.15);
+}
+
+/* Captions and Hints */
+.caption {
+  position: fixed;
+  left: 50%;
+  bottom: max(32px, env(safe-area-inset-bottom, 32px));
+  transform: translateX(-50%);
+  width: min(760px, 92vw);
+  text-align: center;
+  font-size: clamp(15px, 2vw, 19px);
+  line-height: 1.6;
+  color: #cfd8ea;
+  text-shadow: 0 2px 10px #000;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  z-index: 55;
+  pointer-events: none;
+  font-style: italic;
+}
+
+.captionOn {
+  opacity: 0.95;
+}
+
+.hint {
+  position: fixed;
+  top: max(24px, env(safe-area-inset-top, 24px));
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 14px;
+  color: #8d98ab;
+  opacity: 0;
+  transition: opacity 1s ease;
+  z-index: 55;
+  pointer-events: none;
+  letter-spacing: 0.06em;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 6px 16px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.hintOn {
+  opacity: 0.85;
+}
+
+/* Brand Reveal */
+.brand {
+  position: fixed;
+  left: 50%;
+  top: 48%;
+  transform: translate(-50%, -50%);
+  width: min(720px, 92vw);
+  text-align: center;
+  z-index: 56;
+  pointer-events: none;
+}
+
+.brandMark {
+  width: 48px;
+  height: 48px;
+  margin: 0 auto 10px;
+  display: block;
+  opacity: 0;
+  transition: opacity 1.4s 0.3s ease;
+}
+
+.brandTitle {
+  font-weight: 300;
+  font-size: clamp(38px, 8vw, 84px);
+  letter-spacing: 0.38em;
+  padding-left: 0.38em;
+  opacity: 0;
+  transition: opacity 1.6s 0.8s ease;
+  text-shadow: 0 0 28px rgba(188, 212, 255, 0.45);
+  color: #fff;
+}
+
+.brandTag {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: clamp(14px, 2.2vw, 20px);
+  font-style: italic;
+  color: #cfd8ea;
+  line-height: 1.4;
+}
+
+.brandTag span {
+  opacity: 0;
+  transition: opacity 1.2s ease;
+}
+
+.brandOn .brandMark,
+.brandOn .brandTitle,
+.brandOn .brandTag span {
+  opacity: 1;
+}
+
+.brandOn .brandTag span:nth-child(1) { transition-delay: 1.6s; }
+.brandOn .brandTag span:nth-child(2) { transition-delay: 2.4s; }
+.brandOn .brandTag span:nth-child(3) { transition-delay: 3.2s; }
+
+/* Explore Button */
+.exploreBtn {
+  position: fixed;
+  left: 50%;
+  bottom: max(80px, calc(env(safe-area-inset-bottom, 20px) + 60px));
+  transform: translate(-50%, 15px);
+  z-index: 60;
+  opacity: 0;
+  pointer-events: none;
+  font-size: clamp(16px, 2.5vw, 20px);
+  padding: 14px 40px;
+  background: rgba(8, 12, 20, 0.8);
+  border: 1px solid #bcd4ff;
+  border-radius: 4px;
+  color: #fff;
+  box-shadow: 0 0 24px rgba(188, 212, 255, 0.3);
+  transition: opacity 0.8s ease, transform 0.8s ease, background 0.25s, box-shadow 0.25s;
+  cursor: pointer;
+  letter-spacing: 0.05em;
+}
+
+.exploreBtnOn {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(-50%, 0);
+}
+
+.exploreBtn:hover {
+  background: rgba(188, 212, 255, 0.2);
+  box-shadow: 0 0 35px rgba(188, 212, 255, 0.6);
+}
+
+.skipBtn {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 65;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #8d98ab;
+  padding: 6px 14px;
+  font-size: 13px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.skipBtn:hover {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.4);
+}
