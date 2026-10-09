@@ -1,0 +1,69 @@
+{
+  "name": "dhruva",
+  "displayName": "Dhruva (ध्रुव)",
+  "version": "1.0.0",
+  "tagline": "Autonomous Geospatial Intelligence & Gamified Urban Traversal",
+  "repository": "https://github.com/Asymptote-Horizon/Dhruva",
+  "defaultCity": "Pune",
+  "supportedCities": [
+    {
+      "name": "Pune",
+      "state": "Maharashtra",
+      "coordinates": { "lat": 18.5204, "lng": 73.8567 },
+      "poiCount": 8,
+      "defaultZoom": 13
+    },
+    {
+      "name": "Mumbai",
+      "state": "Maharashtra",
+      "coordinates": { "lat": 19.076, "lng": 72.8777 },
+      "poiCount": 6,
+      "defaultZoom": 13
+    },
+    {
+      "name": "Delhi",
+      "state": "National Capital Region",
+      "coordinates": { "lat": 28.6139, "lng": 77.209 },
+      "poiCount": 5,
+      "defaultZoom": 13
+    },
+    {
+      "name": "Bangalore",
+      "state": "Karnataka",
+      "coordinates": { "lat": 12.9716, "lng": 77.5946 },
+      "poiCount": 4,
+      "defaultZoom": 13
+    }
+  ],
+  "safetyModel": {
+    "version": "v1.2",
+    "normalizationScale": [0, 100],
+    "weights": {
+      "crimeInverse": 0.25,
+      "lighting": 0.15,
+      "crowdSafety": 0.15,
+      "userReports": 0.20,
+      "emergencyProximity": 0.15,
+      "roadCondition": 0.10
+    }
+  },
+  "ludicEngine": {
+    "xpPerWaypoint": 100,
+    "photoQuestBonus": 150,
+    "nightExplorationBonus": 200,
+    "streakMultiplier": 1.15,
+    "tiers": [
+      { "level": 1, "title": "Novice Nomad", "minXp": 0 },
+      { "level": 5, "title": "Urban Scout", "minXp": 1500 },
+      { "level": 10, "title": "Citadel Voyager", "minXp": 3500 },
+      { "level": 15, "title": "Celestial Master", "minXp": 6000 }
+    ]
+  },
+  "agentConfig": {
+    "primaryProvider": "openrouter",
+    "primaryModel": "meta-llama/llama-3.1-8b-instruct:free",
+    "temperature": 0.7,
+    "maxTokens": 450,
+    "offlineFallback": true
+  }
+}
