@@ -33,8 +33,9 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 18
-      - name: Install & Build
+      - name: Install, Test & Build
         run: |
           cd frontend-app
           npm ci || npm install
+          npm test
           npm run build

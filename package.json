@@ -1,0 +1,21 @@
+{
+  "name": "dhruva",
+  "version": "1.0.0",
+  "description": "Autonomous Geospatial Intelligence & Gamified Urban Traversal",
+  "private": true,
+  "scripts": {
+    "test": "npm run test --prefix frontend-app",
+    "test:frontend": "npm run test --prefix frontend-app",
+    "build": "npm run build --prefix frontend-app",
+    "start": "npm run start --prefix frontend-app"
+  },
+  "keywords": [
+    "geospatial",
+    "safety",
+    "ai",
+    "gamification",
+    "urban-exploration"
+  ],
+  "author": "Dhruva Team",
+  "license": "MIT"
+}
