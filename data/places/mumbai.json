@@ -1,0 +1,44 @@
+[
+  {
+    "id": "mum-001", "name": "Gateway of India", "description": "The iconic arch monument overlooking the Arabian Sea, built during the British Raj.", "category": "Heritage",
+    "lat": 18.9220, "lng": 72.8347, "safety_score": 80, "rating": 4.5, "reviews_count": 5200, "best_time": "5:00 PM - 9:00 PM",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Mumbai_03-2016_30_Gateway_of_India.jpg/800px-Mumbai_03-2016_30_Gateway_of_India.jpg",
+    "youtube_id": "kZL0z-1T9cE", "tags": ["heritage", "iconic", "sea", "photography"],
+    "safety_factors": {"crime_inverse": 0.8, "lighting": 0.85, "crowd_safety": 0.65, "user_reports": 0.82, "emergency_proximity": 0.8, "road_condition": 0.7}
+  },
+  {
+    "id": "mum-002", "name": "Marine Drive", "description": "The Queen's Necklace — a 3.6 km promenade along the coast with stunning sunset views.", "category": "Scenic",
+    "lat": 18.9432, "lng": 72.8235, "safety_score": 85, "rating": 4.7, "reviews_count": 6100, "best_time": "5:30 PM - 9:00 PM",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Marine_Drive_Skyline.jpg/1280px-Marine_Drive_Skyline.jpg",
+    "youtube_id": "PoROGq2cimQ", "tags": ["scenic", "sunset", "walk", "romantic"],
+    "safety_factors": {"crime_inverse": 0.88, "lighting": 0.9, "crowd_safety": 0.75, "user_reports": 0.85, "emergency_proximity": 0.82, "road_condition": 0.78}
+  },
+  {
+    "id": "mum-003", "name": "Chhatrapati Shivaji Terminus", "description": "A UNESCO World Heritage Site and one of the most beautiful railway stations in the world.", "category": "Heritage",
+    "lat": 18.9398, "lng": 72.8355, "safety_score": 75, "rating": 4.4, "reviews_count": 3400, "best_time": "10:00 AM - 6:00 PM",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Mumbai_Train_Station.jpg/1024px-Mumbai_Train_Station.jpg",
+    "youtube_id": "y1yJKM9Xbqk", "tags": ["heritage", "architecture", "UNESCO", "photography"],
+    "safety_factors": {"crime_inverse": 0.72, "lighting": 0.78, "crowd_safety": 0.6, "user_reports": 0.78, "emergency_proximity": 0.85, "road_condition": 0.65}
+  },
+  {
+    "id": "mum-004", "name": "Bandra-Worli Sea Link", "description": "An engineering marvel — cable-stayed bridge connecting Bandra to Worli with spectacular views.", "category": "Scenic",
+    "lat": 19.0300, "lng": 72.8150, "safety_score": 90, "rating": 4.6, "reviews_count": 2800, "best_time": "6:00 PM - 9:00 PM",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Mumbai_Sea_Link.jpg/1280px-Mumbai_Sea_Link.jpg",
+    "youtube_id": "7FPELc1wEvk", "tags": ["scenic", "bridge", "drive", "sunset"],
+    "safety_factors": {"crime_inverse": 0.92, "lighting": 0.88, "crowd_safety": 0.85, "user_reports": 0.9, "emergency_proximity": 0.7, "road_condition": 0.85}
+  },
+  {
+    "id": "mum-005", "name": "Colaba Causeway", "description": "Mumbai's most famous street market — a paradise for shopping, street food, and people watching.", "category": "Food & Culture",
+    "lat": 18.9178, "lng": 72.8312, "safety_score": 72, "rating": 4.3, "reviews_count": 4100, "best_time": "10:00 AM - 8:00 PM",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Colaba_Causeway_Mumbai.jpg/1280px-Colaba_Causeway_Mumbai.jpg",
+    "youtube_id": "jT2Z5bFpJ28", "tags": ["shopping", "street-food", "culture", "vibrant"],
+    "safety_factors": {"crime_inverse": 0.7, "lighting": 0.72, "crowd_safety": 0.58, "user_reports": 0.75, "emergency_proximity": 0.78, "road_condition": 0.55}
+  },
+  {
+    "id": "mum-006", "name": "Elephanta Caves", "description": "Ancient rock-cut caves on Elephanta Island with stunning Shiva sculptures, a UNESCO World Heritage Site.", "category": "Heritage",
+    "lat": 18.9633, "lng": 72.9315, "safety_score": 78, "rating": 4.5, "reviews_count": 1900, "best_time": "9:00 AM - 2:00 PM",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Elephanta_Caves_Trimurti.jpg/1280px-Elephanta_Caves_Trimurti.jpg",
+    "youtube_id": "rG0W1DkPDhY", "tags": ["heritage", "caves", "UNESCO", "island"],
+    "safety_factors": {"crime_inverse": 0.82, "lighting": 0.55, "crowd_safety": 0.72, "user_reports": 0.8, "emergency_proximity": 0.4, "road_condition": 0.5}
+  }
+]

@@ -1,0 +1,37 @@
+[
+  {
+    "id": "del-001", "name": "India Gate", "description": "The war memorial arch standing tall at the heart of New Delhi, surrounded by lush gardens.", "category": "Heritage",
+    "lat": 28.6129, "lng": 77.2295, "safety_score": 84, "rating": 4.6, "reviews_count": 8500, "best_time": "5:00 PM - 9:00 PM",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/India_Gate_in_New_Delhi_03-2016.jpg/800px-India_Gate_in_New_Delhi_03-2016.jpg",
+    "youtube_id": "C2Bc4sDXJOc", "tags": ["heritage", "monument", "evening", "iconic"],
+    "safety_factors": {"crime_inverse": 0.85, "lighting": 0.88, "crowd_safety": 0.72, "user_reports": 0.85, "emergency_proximity": 0.82, "road_condition": 0.75}
+  },
+  {
+    "id": "del-002", "name": "Qutub Minar", "description": "The 73-meter tall UNESCO World Heritage minaret, built in 1193, the tallest brick minaret in the world.", "category": "Heritage",
+    "lat": 28.5245, "lng": 77.1855, "safety_score": 82, "rating": 4.5, "reviews_count": 5200, "best_time": "9:00 AM - 5:00 PM",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Qutb_Minar_side_view.jpg/800px-Qutb_Minar_side_view.jpg",
+    "youtube_id": "VWz0X5MC8dQ", "tags": ["heritage", "UNESCO", "architecture", "history"],
+    "safety_factors": {"crime_inverse": 0.83, "lighting": 0.72, "crowd_safety": 0.78, "user_reports": 0.84, "emergency_proximity": 0.68, "road_condition": 0.7}
+  },
+  {
+    "id": "del-003", "name": "Chandni Chowk", "description": "Old Delhi's oldest and busiest market — a sensory overload of food, spices, textiles, and history.", "category": "Food & Culture",
+    "lat": 28.6506, "lng": 77.2303, "safety_score": 65, "rating": 4.3, "reviews_count": 6800, "best_time": "10:00 AM - 7:00 PM",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Chandni_Chowk.jpg/1024px-Chandni_Chowk.jpg",
+    "youtube_id": "kHLnXIQcKY4", "tags": ["food", "shopping", "old-delhi", "street-food"],
+    "safety_factors": {"crime_inverse": 0.6, "lighting": 0.62, "crowd_safety": 0.5, "user_reports": 0.68, "emergency_proximity": 0.72, "road_condition": 0.45}
+  },
+  {
+    "id": "del-004", "name": "Humayun's Tomb", "description": "The first garden-tomb in the Indian subcontinent, inspiring the Taj Mahal. A UNESCO World Heritage gem.", "category": "Heritage",
+    "lat": 28.5933, "lng": 77.2507, "safety_score": 87, "rating": 4.6, "reviews_count": 3900, "best_time": "7:00 AM - 5:00 PM",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Humayun_Tomb_Delhi.jpg/1024px-Humayun_Tomb_Delhi.jpg",
+    "youtube_id": "eXGm_ycjEOI", "tags": ["heritage", "UNESCO", "garden", "peaceful"],
+    "safety_factors": {"crime_inverse": 0.88, "lighting": 0.78, "crowd_safety": 0.82, "user_reports": 0.88, "emergency_proximity": 0.72, "road_condition": 0.72}
+  },
+  {
+    "id": "del-005", "name": "Hauz Khas Village", "description": "A trendy urban village blending ancient ruins with modern cafes, art galleries, and boutiques.", "category": "Nightlife",
+    "lat": 28.5494, "lng": 77.2001, "safety_score": 74, "rating": 4.2, "reviews_count": 2400, "best_time": "12:00 PM - 11:00 PM",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Hauz_Khas_Complex_New_Delhi.jpg/1024px-Hauz_Khas_Complex_New_Delhi.jpg",
+    "youtube_id": "F_kPxLRmB5A", "tags": ["nightlife", "cafes", "art", "ruins"],
+    "safety_factors": {"crime_inverse": 0.72, "lighting": 0.75, "crowd_safety": 0.68, "user_reports": 0.76, "emergency_proximity": 0.62, "road_condition": 0.6}
+  }
+]

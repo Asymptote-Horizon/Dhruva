@@ -1,0 +1,30 @@
+[
+  {
+    "id": "blr-001", "name": "Lalbagh Botanical Garden", "description": "A 240-acre garden with rare plants, a glass house, and the famous annual flower shows.", "category": "Nature",
+    "lat": 12.9507, "lng": 77.5848, "safety_score": 86, "rating": 4.5, "reviews_count": 3800, "best_time": "6:00 AM - 9:00 AM",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Glass_House_Lalbagh.jpg/1024px-Glass_House_Lalbagh.jpg",
+    "youtube_id": "bRkLx1V7VYA", "tags": ["nature", "garden", "peaceful", "morning"],
+    "safety_factors": {"crime_inverse": 0.88, "lighting": 0.72, "crowd_safety": 0.82, "user_reports": 0.88, "emergency_proximity": 0.72, "road_condition": 0.65}
+  },
+  {
+    "id": "blr-002", "name": "MG Road & Brigade Road", "description": "Bangalore's iconic commercial streets — shopping, dining, pubs, and the metro experience.", "category": "Food & Culture",
+    "lat": 12.9756, "lng": 77.6064, "safety_score": 78, "rating": 4.3, "reviews_count": 4200, "best_time": "11:00 AM - 10:00 PM",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/MG_Road_Bangalore.jpg/1024px-MG_Road_Bangalore.jpg",
+    "youtube_id": "Z5LrTkLPyMo", "tags": ["shopping", "food", "nightlife", "metro"],
+    "safety_factors": {"crime_inverse": 0.78, "lighting": 0.82, "crowd_safety": 0.7, "user_reports": 0.8, "emergency_proximity": 0.75, "road_condition": 0.65}
+  },
+  {
+    "id": "blr-003", "name": "Bangalore Palace", "description": "A Tudor-style palace inspired by England's Windsor Castle, with beautiful wooden carvings and gardens.", "category": "Heritage",
+    "lat": 12.9987, "lng": 77.5921, "safety_score": 85, "rating": 4.4, "reviews_count": 2100, "best_time": "10:00 AM - 5:30 PM",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Bangalore_Palace.jpg/1024px-Bangalore_Palace.jpg",
+    "youtube_id": "qIhqXGYaC0U", "tags": ["heritage", "palace", "architecture", "gardens"],
+    "safety_factors": {"crime_inverse": 0.86, "lighting": 0.75, "crowd_safety": 0.8, "user_reports": 0.86, "emergency_proximity": 0.7, "road_condition": 0.68}
+  },
+  {
+    "id": "blr-004", "name": "Cubbon Park", "description": "A 300-acre green lung in the heart of Bangalore with walking paths, a bandstand, and historic buildings.", "category": "Nature",
+    "lat": 12.9763, "lng": 77.5929, "safety_score": 81, "rating": 4.5, "reviews_count": 3500, "best_time": "6:00 AM - 9:30 AM",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Cubbon_Park_Bangalore.jpg/1024px-Cubbon_Park_Bangalore.jpg",
+    "youtube_id": "8i6hXGfKy6U", "tags": ["nature", "park", "jogging", "relaxation"],
+    "safety_factors": {"crime_inverse": 0.82, "lighting": 0.68, "crowd_safety": 0.78, "user_reports": 0.84, "emergency_proximity": 0.72, "road_condition": 0.62}
+  }
+]

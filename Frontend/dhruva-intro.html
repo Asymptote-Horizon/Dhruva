@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dhruva</title>
+<style>
+  :root { --ink:#e9eef7; --dim:#8d98ab; --star:#bcd4ff; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  html, body { height:100%; background:#000; overflow:hidden; color:var(--ink);
+    font-family:"Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif; }
+  canvas#scene { position:fixed; inset:0; width:100%; height:100%; display:block; touch-action:none; }
+  canvas#scene.glitch { animation:glitch .7s steps(1) 1; }
+  @keyframes glitch {
+    0%   { transform:translate(0,0); filter:none; opacity:1; }
+    12%  { transform:translate(-8px,2px); filter:hue-rotate(80deg) contrast(1.6); opacity:.6; }
+    24%  { transform:translate(6px,-3px); filter:invert(1) contrast(2); opacity:.9; }
+    36%  { transform:translate(0,0); filter:none; opacity:0; }
+    52%  { transform:translate(10px,0); filter:hue-rotate(-60deg) saturate(2); opacity:.7; }
+    68%  { transform:translate(-4px,4px); filter:contrast(2); opacity:.3; }
+    84%  { transform:translate(2px,0); filter:none; opacity:.8; }
+    100% { transform:translate(0,0); filter:none; opacity:1; }
+  }
+
+  /* gate */
+  #gate { position:fixed; inset:0; z-index:20; background:#000; display:flex; flex-direction:column;
+    align-items:center; justify-content:center; gap:28px; text-align:center; padding:24px; transition:opacity .5s; }
+  #gate.off { opacity:0; pointer-events:none; }
+  #gate h2 { font-weight:400; font-size:clamp(22px,4vw,34px); letter-spacing:.06em; }
+  #gate p { color:var(--dim); font-size:15px; max-width:34ch; line-height:1.5; }
+  .row { display:flex; gap:14px; flex-wrap:wrap; justify-content:center; }
+  button { font:inherit; cursor:pointer; color:var(--ink); background:transparent;
+    border:1px solid rgba(233,238,247,.45); padding:12px 28px; border-radius:2px; font-size:17px; letter-spacing:.04em;
+    transition:background .2s, border-color .2s, color .2s; }
+  button:hover, button:focus-visible { background:rgba(188,212,255,.12); border-color:var(--star); outline:none; }
+  button.primary { border-color:var(--star); }
+
+  /* caption + hint */
+  #caption { position:fixed; left:50%; bottom:max(28px, env(safe-area-inset-bottom)); transform:translateX(-50%);
+    width:min(760px, 92vw); text-align:center; font-size:clamp(14px,1.8vw,18px); line-height:1.5; color:#c7cfdd;
+    text-shadow:0 1px 8px #000; opacity:0; transition:opacity .6s; z-index:5; pointer-events:none; }
+  #caption.on { opacity:.9; }
+  #hint { position:fixed; top:max(22px, env(safe-area-inset-top)); left:50%; transform:translateX(-50%); font-size:14px;
+    color:var(--dim); opacity:0; transition:opacity 1s; z-index:5; pointer-events:none; letter-spacing:.05em; }
+  #hint.on { opacity:.8; }
+
+  /* brand */
+  #brand { position:fixed; left:50%; top:54%; transform:translateX(-50%); width:min(720px, 92vw); text-align:center;
+    z-index:6; pointer-events:none; }
+  #brand .mark { width:46px; height:46px; margin:0 auto 6px; display:block; opacity:0; transition:opacity 1.4s .3s; }
+  #brand h1 { font-weight:300; font-size:clamp(40px,8vw,84px); letter-spacing:.38em; padding-left:.38em; opacity:0;
+    transition:opacity 1.6s .8s; text-shadow:0 0 28px rgba(188,212,255,.45); }
+  #brand .tag { margin-top:14px; display:flex; flex-direction:column; gap:4px; font-size:clamp(14px,2vw,20px); font-style:italic;
+    color:#cfd8ea; line-height:1.4; }
+  #brand .tag span { opacity:0; transition:opacity 1.2s; }
+  #brand.on .mark, #brand.on h1, #brand.on .tag span { opacity:1; }
+  #brand.on .tag span:nth-child(1) { transition-delay:2s; }
+  #brand.on .tag span:nth-child(2) { transition-delay:2.8s; }
+  #brand.on .tag span:nth-child(3) { transition-delay:3.6s; }
+
+  #explore { position:fixed; left:50%; bottom:max(84px, calc(env(safe-area-inset-bottom) + 70px)); transform:translate(-50%, 10px);
+    z-index:10; opacity:0; pointer-events:none; font-size:20px; padding:14px 38px; background:rgba(8,12,20,.6);
+    border-color:var(--star); box-shadow:0 0 22px rgba(188,212,255,.25); transition:opacity .8s, transform .8s, background .2s; }
+  #explore.on { opacity:1; pointer-events:auto; transform:translate(-50%, 0); }
+
+  @media (prefers-reduced-motion: reduce) { canvas#scene.glitch { animation:none; } }
+</style>
+</head>
+<body>
+
+<canvas id="scene"></canvas>
+
+<div id="brand" aria-hidden="true">
+  <svg class="mark" viewBox="0 0 100 100" fill="none">
+    <circle cx="50" cy="50" r="44" stroke="#bcd4ff" stroke-opacity=".55" stroke-width="1.5"/>
+    <path d="M50 8 L57 43 L92 50 L57 57 L50 92 L43 57 L8 50 L43 43 Z" fill="#eef4ff"/>
+  </svg>
+  <h1>DHRUV</h1>
+  <p class="tag">
+    <span>From City Chaos to Confidence,</span>
+    <span>Anxiety to Adventure</span>
+    <span>&amp; Doomed Dark to Light of &ldquo;DHRUV&rdquo;.</span>
+  </p>
+</div>
+
+<div id="hint">Your cursor is the torch. Move it.</div>
+<div id="caption"></div>
+<button id="explore" type="button">Explore now!</button>
+
+<div id="gate">
+  <h2>Dhruva</h2>
+  <p>Turn on game mode? Sound is part of the story.</p>
+  <div class="row">
+    <button id="gameOn" class="primary" type="button">Game mode on</button>
+    <button id="gameOff" type="button">Game mode off</button>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+/* ============================ CONFIG ============================ */
+const CONFIG = {
+  // Your three TTS parts. Each one advances the scene when it finishes.
+  audio: ['audio/part1.mp3', 'audio/part2.mp3', 'audio/part3.mp3'],
+  // Used only if a file is missing, so the flow never stalls (seconds).
+  fallbackSeconds: [9, 6, 7],
+  // Optional sounds: skipped silently if the files are not there yet.
+  ambience: 'audio/ambience.mp3',
+  glitchSfx: 'audio/glitch.mp3',
+  exploreUrl: 'game.html',
+  simpleUrl: 'simple.html'
+};
+const CAPTIONS = [
+  'So, hello. I see you \u2014 a weary traveller lost in the chaos of the city, confused about choices to take. In this darkened doom\u2026',
+  '\u2026there\u2019s one light of hope \u2014 the ever unchanging, constantly guiding \u2014 \u201CDHRUV\u201D.',
+  'And let\u2019s start the way any kid would \u2014 play the game, explore, and call me right back when you need.'
+];
+
+/* ============================ RENDERER ============================ */
+const canvas = document.getElementById('scene');
+const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+renderer.setSize(innerWidth, innerHeight);
+renderer.outputEncoding = THREE.sRGBEncoding;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.15;
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x000000);
+scene.fog = new THREE.FogExp2(0x010102, 0.03);
+
+const camera = new THREE.PerspectiveCamera(70, innerWidth / innerHeight, 0.1, 400);
+camera.rotation.order = 'YXZ';
+const CAM_Z = 12;           // traveller stands in the south road, looking north at the junction
+camera.position.set(0, 1.7, CAM_Z);
+
+/* ============================ TEXTURES ============================ */
+function canvasTex(size, draw, repeat, srgb = true) {
+  const c = document.createElement('canvas'); c.width = c.height = size;
+  const g = c.getContext('2d'); draw(g, size);
+  const t = new THREE.CanvasTexture(c);
+  t.wrapS = t.wrapT = THREE.RepeatWrapping;
+  if (repeat) t.repeat.set(repeat[0], repeat[1]);
+  if (srgb) t.encoding = THREE.sRGBEncoding;
+  t.anisotropy = renderer.capabilities.getMaxAnisotropy();
+  return t;
+}
+function speckle(g, s, n, rgb, aMax, maxSize = 2) {
+  for (let i = 0; i < n; i++) {
+    g.fillStyle = `rgba(${rgb},${Math.random() * aMax})`;
+    g.fillRect(Math.random() * s, Math.random() * s, 1 + Math.random() * maxSize, 1 + Math.random() * maxSize);
+  }
+}
+function cracks(g, s, n) {
+  g.strokeStyle = 'rgba(0,0,0,.55)'; g.lineWidth = 1;
+  for (let i = 0; i < n; i++) {
+    let x = Math.random() * s, y = Math.random() * s;
+    g.beginPath(); g.moveTo(x, y);
+    for (let k = 0; k < 7; k++) { x += (Math.random() - .5) * 40; y += (Math.random() - .5) * 40; g.lineTo(x, y); }
+    g.stroke();
+  }
+}
+const asphaltBase = canvasTex(512, (g, s) => {
+  g.fillStyle = '#2c2c30'; g.fillRect(0, 0, s, s);
+  speckle(g, s, 9000, '160,160,165', .35);
+  speckle(g, s, 9000, '0,0,0', .5);
+  for (let i = 0; i < 14; i++) {            // patched, slightly lighter / darker blotches
+    const x = Math.random() * s, y = Math.random() * s, r = 30 + Math.random() * 70;
+    const gr = g.createRadialGradient(x, y, 0, x, y, r);
+    const dark = Math.random() > .5;
+    gr.addColorStop(0, dark ? 'rgba(0,0,0,.22)' : 'rgba(90,90,96,.14)'); gr.addColorStop(1, 'rgba(0,0,0,0)');
+    g.fillStyle = gr; g.fillRect(x - r, y - r, r * 2, r * 2);
+  }
+  cracks(g, s, 6);
+});
+const concreteBase = canvasTex(256, (g, s) => {
+  g.fillStyle = '#4a4a4c'; g.fillRect(0, 0, s, s);
+  speckle(g, s, 3500, '210,210,210', .22); speckle(g, s, 3500, '0,0,0', .3);
+  g.strokeStyle = 'rgba(0,0,0,.6)'; g.lineWidth = 3;
+  g.strokeRect(0, 0, s, s); g.beginPath(); g.moveTo(s / 2, 0); g.lineTo(s / 2, s); g.stroke();
+});
+function tiled(base, rx, ry) { const t = base.clone(); t.needsUpdate = true; t.repeat.set(rx, ry); return t; }
+
+function facade(base) {
+  return canvasTex(256, (g, s) => {
+    g.fillStyle = base; g.fillRect(0, 0, s, s);
+    speckle(g, s, 2500, '255,255,255', .06); speckle(g, s, 3000, '0,0,0', .22);
+    for (const x of [36, 148]) {
+      g.fillStyle = '#1b2026'; g.fillRect(x - 5, 38, 90, 144);       // frame
+      g.fillStyle = '#06090d'; g.fillRect(x, 44, 80, 132);           // glass
+      g.fillStyle = 'rgba(130,160,200,.09)';                         // reflection
+      g.beginPath(); g.moveTo(x, 44); g.lineTo(x + 46, 44); g.lineTo(x, 120); g.closePath(); g.fill();
+      g.fillStyle = '#23282f'; g.fillRect(x - 7, 176, 94, 8);        // sill
+      g.fillStyle = '#0d1014'; g.fillRect(x + 38, 44, 3, 132);       // mullion
+    }
+    g.fillStyle = 'rgba(0,0,0,.38)'; g.fillRect(0, s - 8, s, 8);     // floor band
+  });
+}
+const FACADES = [facade('#2a2d34'), facade('#3b2b27'), facade('#34332e')];
+const facadeMats = {};
+function facadeMat(variant, floors) {
+  const key = variant + '|' + floors;
+  if (!facadeMats[key]) {
+    const t = FACADES[variant].clone(); t.needsUpdate = true; t.repeat.set(3, floors);
+    facadeMats[key] = new THREE.MeshStandardMaterial({ map: t, roughness: .6, metalness: .05 });
+  }
+  return facadeMats[key];
+}
+const roofMat = new THREE.MeshStandardMaterial({ color: 0x0c0c0e, roughness: 1 });
+
+/* ============================ GROUND + ROADS ============================ */
+const hits = [];                       // things the torch can land on
+const ROAD_W = 10, ROAD_L = 240;
+
+const baseGround = new THREE.Mesh(new THREE.PlaneGeometry(500, 500),
+  new THREE.MeshStandardMaterial({ color: 0x0b0b0c, roughness: 1 }));
+baseGround.rotation.x = -Math.PI / 2; baseGround.position.y = -0.03; baseGround.receiveShadow = true;
+scene.add(baseGround);
+
+function road(w, l, rx, ry, rotY, y) {
+  const m = new THREE.Mesh(new THREE.PlaneGeometry(w, l),
+    new THREE.MeshStandardMaterial({
+      map: tiled(asphaltBase, rx, ry), bumpMap: tiled(asphaltBase, rx, ry), bumpScale: 1.4,
+      roughness: .78, metalness: .06
+    }));
+  m.rotation.x = -Math.PI / 2; m.rotation.z = rotY; m.position.y = y; m.receiveShadow = true;
+  scene.add(m); hits.push(m); return m;
+}
+road(ROAD_W, ROAD_L, 2.5, 60, 0, 0);                 // north–south
+road(ROAD_W, ROAD_L, 2.5, 60, Math.PI / 2, 0.006);   // east–west (lifted a hair to avoid z-fighting)
+
+// lane markings
+const dashTex = canvasTex(128, (g, s) => {
+  g.clearRect(0, 0, s, s);
+  g.fillStyle = 'rgba(205,200,170,.85)'; g.fillRect(s / 2 - 3, 8, 6, s * .5);
+  speckle(g, s, 500, '0,0,0', .6);
+}, null);
+dashTex.format = THREE.RGBAFormat;
+function lane(len, rotZ, pos) {
+  const t = dashTex.clone(); t.needsUpdate = true; t.repeat.set(1, len / 6);
+  const m = new THREE.Mesh(new THREE.PlaneGeometry(1.2, len),
+    new THREE.MeshStandardMaterial({ map: t, transparent: true, roughness: .8, depthWrite: false }));
+  m.rotation.x = -Math.PI / 2; m.rotation.z = rotZ; m.position.copy(pos); m.receiveShadow = true;
+  scene.add(m);
+}
+const armLen = 110, armC = 5 + armLen / 2;
+lane(armLen, 0, new THREE.Vector3(0, 0.012, armC));
+lane(armLen, 0, new THREE.Vector3(0, 0.012, -armC));
+lane(armLen, Math.PI / 2, new THREE.Vector3(armC, 0.014, 0));
+lane(armLen, Math.PI / 2, new THREE.Vector3(-armC, 0.014, 0));
+
+// zebra crossings on all four arms
+const zebraMat = new THREE.MeshStandardMaterial({ color: 0xb9b6a6, roughness: .85 });
+function zebra(cx, cz, alongX) {
+  for (let i = -4; i <= 4; i++) {
+    const stripe = new THREE.Mesh(new THREE.PlaneGeometry(alongX ? 3 : .6, alongX ? .6 : 3), zebraMat);
+    stripe.rotation.x = -Math.PI / 2;
+    stripe.position.set(cx + (alongX ? 0 : i * 1.05), 0.016, cz + (alongX ? i * 1.05 : 0));
+    stripe.receiveShadow = true; scene.add(stripe);
+  }
+}
+zebra(0, 7.5, false); zebra(0, -7.5, false); zebra(7.5, 0, true); zebra(-7.5, 0, true);
+
+/* ============================ SIDEWALKS + BUILDINGS ============================ */
+const SLAB = 75;
+const slabMat = new THREE.MeshStandardMaterial({ map: tiled(concreteBase, SLAB / 3, SLAB / 3), roughness: .92 });
+let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;   // stable layout every load
+
+for (const sx of [-1, 1]) for (const sz of [-1, 1]) {
+  const slab = new THREE.Mesh(new THREE.BoxGeometry(SLAB, 0.16, SLAB), slabMat);
+  slab.position.set(sx * (5 + SLAB / 2), 0.08, sz * (5 + SLAB / 2));
+  slab.receiveShadow = true; slab.castShadow = true; scene.add(slab); hits.push(slab);
+
+  for (let i = 0; i < 4; i++) for (let j = 0; j < 4; j++) {
+    const floors = 4 + Math.floor(rnd() * 7);          // 4..10
+    const h = floors * 4, variant = Math.floor(rnd() * 3);
+    const sm = facadeMat(variant, floors);
+    const b = new THREE.Mesh(new THREE.BoxGeometry(12, h, 12), [sm, sm, roofMat, roofMat, sm, sm]);
+    b.position.set(sx * (8 + 6 + i * 16), 0.16 + h / 2, sz * (8 + 6 + j * 16));
+    b.castShadow = true; b.receiveShadow = true; scene.add(b); hits.push(b);
+  }
+}
+
+/* ============================ STREET FURNITURE (all dead / dark) ============================ */
+const metal = new THREE.MeshStandardMaterial({ color: 0x1a1c20, roughness: .5, metalness: .7 });
+function lamp(x, z, faceX, faceZ) {
+  const g = new THREE.Group();
+  const pole = new THREE.Mesh(new THREE.CylinderGeometry(.09, .13, 7, 8), metal); pole.position.y = 3.5;
+  const arm = new THREE.Mesh(new THREE.BoxGeometry(1.6, .1, .1), metal); arm.position.set(0, 7, 0);
+  const head = new THREE.Mesh(new THREE.BoxGeometry(.7, .16, .32), new THREE.MeshStandardMaterial({ color: 0x0d0e10, roughness: .4, metalness: .5 }));
+  head.position.set(.8, 6.92, 0);
+  g.add(pole, arm, head); g.position.set(x, .16, z);
+  g.rotation.y = Math.atan2(faceX, faceZ) - Math.PI / 2 + Math.PI / 2;
+  g.traverse(o => { o.castShadow = true; }); scene.add(g);
+}
+for (const d of [14, 38, 62]) for (const s of [-1, 1]) {
+  lamp(s * 6.4, d, -s, 0); lamp(s * 6.4, -d, -s, 0);       // north–south road
+  lamp(d, s * 6.4, 0, -s); lamp(-d, s * 6.4, 0, -s);       // east–west road
+}
+
+// signpost with confusing boards, close to the traveller
+function signTex(txt) {
+  return canvasTex(256, (g, s) => {
+    g.fillStyle = '#2d3a36'; g.fillRect(0, 0, s, s);
+    speckle(g, s, 1500, '0,0,0', .4); speckle(g, s, 600, '255,255,255', .08);
+    g.strokeStyle = '#8a948f'; g.lineWidth = 6; g.strokeRect(8, 8, s - 16, s - 16);
+    g.fillStyle = '#b8c2bc'; g.font = 'bold 120px Georgia, serif'; g.textAlign = 'center'; g.textBaseline = 'middle';
+    g.fillText(txt, s / 2, s / 2 + 6);
+  });
+}
+{
+  const g = new THREE.Group(); g.position.set(5.9, .16, 6.2);
+  const pole = new THREE.Mesh(new THREE.CylinderGeometry(.06, .07, 3.6, 8), metal); pole.position.y = 1.8; g.add(pole);
+  [['\u2190 ?', .55, 2.15], ['? \u2192', -.35, 2.65], ['\u2191 ?', 1.15, 3.15]].forEach(([t, ry, y]) => {
+    const board = new THREE.Mesh(new THREE.BoxGeometry(1.4, .38, .04),
+      [metal, metal, metal, metal, new THREE.MeshStandardMaterial({ map: signTex(t), roughness: .5 }), metal]);
+    board.position.y = y; board.rotation.y = ry; board.castShadow = true; g.add(board);
+  });
+  g.traverse(o => { o.castShadow = true; }); scene.add(g);
+}
+
+/* ============================ LIGHTS ============================ */
+const ambient = new THREE.AmbientLight(0x1a2438, 0.022);          // nearly black; rises a touch in part 2
+scene.add(ambient);
+
+const torch = new THREE.SpotLight(0xffe2b4, 2.4, 60, 0.2, 0.8, 1.1);
+torch.castShadow = true; torch.shadow.mapSize.set(1024, 1024); torch.shadow.bias = -0.0005;
+torch.shadow.camera.near = .3; torch.shadow.camera.far = 70;
+scene.add(torch, torch.target);
+const torchGlow = new THREE.PointLight(0xffd9a0, 0.45, 10, 2); scene.add(torchGlow);
+
+/* ============================ THE STAR ============================ */
+function starTexture() {
+  const s = 256, c = document.createElement('canvas'); c.width = c.height = s;
+  const g = c.getContext('2d');
+  const gr = g.createRadialGradient(128, 128, 0, 128, 128, 128);
+  gr.addColorStop(0, 'rgba(255,255,255,1)'); gr.addColorStop(.05, 'rgba(240,246,255,.95)');
+  gr.addColorStop(.16, 'rgba(165,200,255,.38)'); gr.addColorStop(.5, 'rgba(110,150,255,.07)'); gr.addColorStop(1, 'rgba(0,0,0,0)');
+  g.fillStyle = gr; g.fillRect(0, 0, s, s);
+  g.globalCompositeOperation = 'lighter';
+  const h = g.createLinearGradient(0, 0, s, 0);
+  h.addColorStop(0, 'rgba(255,255,255,0)'); h.addColorStop(.5, 'rgba(255,255,255,.9)'); h.addColorStop(1, 'rgba(255,255,255,0)');
+  g.fillStyle = h; g.fillRect(0, 126, s, 4);
+  const v = g.createLinearGradient(0, 0, 0, s);
+  v.addColorStop(0, 'rgba(255,255,255,0)'); v.addColorStop(.5, 'rgba(255,255,255,.9)'); v.addColorStop(1, 'rgba(255,255,255,0)');
+  g.fillStyle = v; g.fillRect(126, 0, 4, s);
+  const t = new THREE.CanvasTexture(c); t.encoding = THREE.sRGBEncoding; return t;
+}
+const STAR_POS = new THREE.Vector3(0, 70, -90);
+const star = new THREE.Sprite(new THREE.SpriteMaterial({
+  map: starTexture(), transparent: true, opacity: 0, blending: THREE.AdditiveBlending, depthWrite: false, fog: false
+}));
+star.position.copy(STAR_POS); star.scale.set(12, 12, 1); scene.add(star);
+const starLight = new THREE.PointLight(0xb7cfff, 0, 400, 1); starLight.position.copy(STAR_POS); scene.add(starLight);
+
+/* ============================ INPUT ============================ */
+let tmx = 0, tmy = -0.05, mx = 0, my = -0.05;
+addEventListener('pointermove', e => { tmx = (e.clientX / innerWidth) * 2 - 1; tmy = -(e.clientY / innerHeight) * 2 + 1; });
+addEventListener('pointerdown', e => { tmx = (e.clientX / innerWidth) * 2 - 1; tmy = -(e.clientY / innerHeight) * 2 + 1; });
+addEventListener('resize', () => {
+  camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix(); renderer.setSize(innerWidth, innerHeight);
+});
+
+/* ============================ LOOP ============================ */
+let stage = 0;                 // 0 gate, 1 torch, 2 star, 3 invitation
+let yaw = 0, pitch = 0, torchLevel = 1, starLevel = 0;
+const clock = new THREE.Clock(), ray = new THREE.Raycaster(), ndc = new THREE.Vector2();
+const tgt = new THREE.Vector3(0, 0, -20), aim = new THREE.Vector3(), tmp = new THREE.Vector3();
+
+function frame() {
+  requestAnimationFrame(frame);
+  const dt = Math.min(clock.getDelta(), .05), t = clock.elapsedTime;
+  const k = (r) => 1 - Math.exp(-dt * r);
+
+  mx += (tmx - mx) * k(6); my += (tmy - my) * k(6);
+
+  let ty, tp, rate;
+  if (stage < 2) { ty = -mx * .6 + Math.sin(t * .35) * .06; tp = my * .22 - .02; rate = 6; }
+  else           { ty = 0; tp = 0.42; rate = 1.1; }                      // the slow pan up to Dhruv
+  yaw += (ty - yaw) * k(rate); pitch += (tp - pitch) * k(rate);
+
+  camera.position.set(Math.sin(t * .9) * .02, 1.7 + Math.sin(t * 1.7) * .015, CAM_Z);   // walking-weight sway
+  camera.rotation.set(pitch, yaw, 0);
+  camera.updateMatrixWorld();
+
+  // torch follows the cursor
+  ndc.set(tmx, tmy); ray.setFromCamera(ndc, camera);
+  const hit = ray.intersectObjects(hits, false)[0];
+  aim.copy(hit ? hit.point : ray.ray.at(40, tmp));
+  tgt.lerp(aim, k(14));
+  torch.position.copy(camera.localToWorld(new THREE.Vector3(.3, -.3, -.2)));
+  torch.target.position.copy(tgt);
+  torchGlow.position.copy(tgt).lerp(camera.position, .08);
+
+  torchLevel += ((stage >= 2 ? 0 : 1) - torchLevel) * k(1.6);
+  torch.intensity = 2.4 * torchLevel; torchGlow.intensity = .45 * torchLevel;
+
+  starLevel += ((stage >= 2 ? 1 : 0) - starLevel) * k(.9);
+  star.material.opacity = starLevel;
+  const tw = 1 + Math.sin(t * 2.3) * .05 + Math.sin(t * 5.1) * .025;
+  star.scale.set(12 * tw, 12 * tw, 1);
+  starLight.intensity = .3 * starLevel;
+  ambient.intensity = .022 + .07 * starLevel;
+
+  renderer.render(scene, camera);
+}
+frame();
+
+/* ============================ AUDIO + STORY ============================ */
+const $ = id => document.getElementById(id);
+const caption = $('caption');
+function say(i) {
+  caption.classList.remove('on');
+  setTimeout(() => { caption.textContent = CAPTIONS[i]; caption.classList.add('on'); }, 300);
+}
+function playOptional(src, { loop = false, volume = .5 } = {}) {
+  try { const a = new Audio(src); a.loop = loop; a.volume = volume; a.play().catch(() => {}); return a; } catch (e) { return null; }
+}
+// Plays one narration part and resolves when it ENDS (or on fallback timer if the file is missing).
+function playPart(i) {
+  return new Promise(resolve => {
+    let done = false;
+    const finish = () => { if (!done) { done = true; resolve(); } };
+    const fallback = () => setTimeout(finish, CONFIG.fallbackSeconds[i] * 1000);
+    const a = new Audio(CONFIG.audio[i]);
+    a.preload = 'auto';
+    a.addEventListener('ended', finish);
+    a.addEventListener('error', fallback);
+    a.play().catch(fallback);
+  });
+}
+const wait = ms => new Promise(r => setTimeout(r, ms));
+
+async function startIntro() {
+  $('gate').classList.add('off');
+  // location detection (non-blocking; result is available to the rest of the app)
+  if (navigator.geolocation) navigator.geolocation.getCurrentPosition(
+    p => { window.dhruvaLocation = { lat: p.coords.latitude, lng: p.coords.longitude }; },
+    () => {}, { timeout: 6000 });
+
+  // short glitch, then the story
+  playOptional(CONFIG.glitchSfx, { volume: .7 });
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) { canvas.classList.add('glitch'); }
+  playOptional(CONFIG.ambience, { loop: true, volume: .25 });
+  await wait(900);
+
+  // 1. blackness, cursor torch
+  stage = 1; $('hint').classList.add('on'); say(0);
+  setTimeout(() => $('hint').classList.remove('on'), 7000);
+  await playPart(0);
+
+  // 2. camera pans up, Dhruv and its details appear
+  stage = 2; say(1); $('brand').classList.add('on');
+  await playPart(1);
+
+  // 3. invitation, button appears the moment it starts
+  stage = 3; say(2); $('explore').classList.add('on');
+  await playPart(2);
+}
+
+$('gameOn').addEventListener('click', startIntro, { once: true });
+$('gameOff').addEventListener('click', () => { location.href = CONFIG.simpleUrl; });
+$('explore').addEventListener('click', () => {
+  window.dispatchEvent(new CustomEvent('dhruva:explore', { detail: { location: window.dhruvaLocation || null } }));
+  if (CONFIG.exploreUrl) location.href = CONFIG.exploreUrl;
+});
+</script>
+</body>
+</html>

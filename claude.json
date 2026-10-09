@@ -1,0 +1,9 @@
+{
+  "model": "claude-sonnet-4-20250514",
+  "systemPrompt": "You are helping build Dhruva — a gamified city exploration platform. Tech stack: Next.js 14, FastAPI, OpenRouter, Leaflet, Three.js, Motion.dev, ReactBits.",
+  "contextFiles": [
+    "docs/PRD.md",
+    "docs/TRD.md",
+    "docs/context-for-other-ai.md"
+  ]
+}

@@ -1,0 +1,16 @@
+did research
+
+created the user flow in my mind
+
+this is starting prompt to gemini waiting for the scene 
+So, hello. I see you - a weary traveller lost in the chaos of the city, confused about choices to take. In this darkened doom - there's one light of hope - the ever unchanging, constantly guiding - "DHRUV".
+And lets start the way any kid would- play the game, explore, and call me right back when you need."
+
+
+
+now, ill take this and start the website, github, and host on vercel ok..
+
+
+then we will go to the backend and finally add frontend lets finsih this asap time is running
+
+
