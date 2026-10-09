@@ -1,0 +1,14 @@
+{
+  "description": "Standard Overpass QL queries used by Dhruva to fetch OSM landmark telemetry",
+  "queries": {
+    "tourism_heritage": "[out:json][timeout:25];(node[\"tourism\"=\"attraction\"](area:{{area_id}});node[\"historic\"](area:{{area_id}});way[\"historic\"](area:{{area_id}}););out body;>;out skel qt;",
+    "safety_infrastructure": "[out:json][timeout:25];(node[\"amenity\"=\"police\"](area:{{area_id}});node[\"amenity\"=\"hospital\"](area:{{area_id}});node[\"highway\"=\"street_lamp\"](area:{{area_id}}););out body;>;out skel qt;",
+    "pedestrian_arteries": "[out:json][timeout:25];way[\"highway\"~\"footway|pedestrian|living_street\"](area:{{area_id}});out body;>;out skel qt;"
+  },
+  "cityCentroids": {
+    "Pune": { "lat": 18.5204, "lng": 73.8567, "radius_m": 8000 },
+    "Mumbai": { "lat": 19.0760, "lng": 72.8777, "radius_m": 10000 },
+    "Delhi": { "lat": 28.6139, "lng": 77.2090, "radius_m": 12000 },
+    "Bangalore": { "lat": 12.9716, "lng": 77.5946, "radius_m": 10000 }
+  }
+}

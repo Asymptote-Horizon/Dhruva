@@ -1,0 +1,71 @@
+{
+  "onboardingVersion": "1.0.0",
+  "steps": [
+    {
+      "step": 1,
+      "id": "welcome_cosmos",
+      "title": "Welcome to Dhruva (ध्रुव)",
+      "subtitle": "Named after the immutable Pole Star",
+      "description": "Transform urban anxiety into confident, gamified exploration across India's vibrant metropolises."
+    },
+    {
+      "step": 2,
+      "id": "select_archetype",
+      "title": "Choose Your Explorer Archetype",
+      "options": [
+        {
+          "key": "curious_nomad",
+          "name": "Curious Nomad",
+          "perk": "+10% XP on scenic parks & cultural corridors",
+          "badge": "🧭"
+        },
+        {
+          "key": "citadel_historian",
+          "name": "Citadel Historian",
+          "perk": "+15% XP on historical forts & UNESCO monuments",
+          "badge": "🏛️"
+        },
+        {
+          "key": "urban_sentinel",
+          "name": "Urban Sentinel",
+          "perk": "Prioritizes high-lux well-trafficked safety arteries",
+          "badge": "🛡️"
+        },
+        {
+          "key": "night_voyager",
+          "name": "Night Voyager",
+          "perk": "Special late-night safety vector alerts & food hotspots",
+          "badge": "🌙"
+        }
+      ]
+    },
+    {
+      "step": 3,
+      "id": "permissions_setup",
+      "title": "Sensory & Telemetry Alignment",
+      "description": "Enable GPS for proximity-based geofence check-ins and high-lux route navigation.",
+      "requiredPermissions": ["geolocation", "audio"]
+    },
+    {
+      "step": 4,
+      "id": "initial_city",
+      "title": "Set Base Territory",
+      "default": "Pune",
+      "available": ["Pune", "Mumbai", "Delhi", "Bangalore"]
+    }
+  ],
+  "starterQuests": [
+    {
+      "city": "Pune",
+      "title": "First Beacon: Shaniwar Wada",
+      "desc": "Check in near the historic 18th-century Maratha gates.",
+      "xp": 150
+    },
+    {
+      "city": "Mumbai",
+      "title": "Sea Breeze Initiation: Marine Drive",
+      "desc": "Walk the Queen's Necklace promenade during sunset.",
+      "xp": 150
+    }
+  ]
+}

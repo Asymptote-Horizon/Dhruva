@@ -1,0 +1,23 @@
+{
+  "description": "Dhruva Audio Narration & Guided Tour Manifest",
+  "tracks": [
+    {
+      "id": "pune-audio-01",
+      "placeId": "pune-001",
+      "placeName": "Shaniwar Wada",
+      "audioFile": "/audio/shaniwar_wada_intro.mp3",
+      "durationSec": 95,
+      "narrator": "Dhruva AI Voice (Astral Guide)",
+      "language": "en"
+    },
+    {
+      "id": "pune-audio-02",
+      "placeId": "pune-002",
+      "placeName": "Dagdusheth Ganpati",
+      "audioFile": "/audio/dagdusheth_history.mp3",
+      "durationSec": 80,
+      "narrator": "Dhruva AI Voice (Astral Guide)",
+      "language": "en"
+    }
+  ]
+}

@@ -234,6 +234,17 @@ async def get_weather(city: str = "Pune"):
     }
     return weather_data.get(city, weather_data["Pune"])
 
+@app.get("/api/osm/pois")
+async def get_osm_pois(city: str = "Pune"):
+    """Get live or cached OpenStreetMap landmark features"""
+    try:
+        from services.osm_service import OSMTelemetryService
+        service = OSMTelemetryService()
+        pois = await service.fetch_city_pois(city)
+        return {"city": city, "source": "openstreetmap", "count": len(pois), "features": pois}
+    except Exception as e:
+        return {"city": city, "source": "fallback", "count": 0, "features": [], "error": str(e)}
+
 @app.get("/")
 async def root():
     return {"message": "Dhruva API v1.0 — Gamified Urban Exploration", "status": "active"}

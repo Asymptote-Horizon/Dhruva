@@ -1,0 +1,70 @@
+{
+  "type": "FeatureCollection",
+  "generator": "overpass-turbo-dhruva-extractor",
+  "timestamp": "2026-10-09T08:00:00Z",
+  "features": [
+    {
+      "type": "Feature",
+      "id": "node/34829104",
+      "geometry": { "type": "Point", "coordinates": [73.8553, 18.5195] },
+      "properties": {
+        "name": "Shaniwar Wada",
+        "historic": "fort",
+        "tourism": "attraction",
+        "heritage": "yes",
+        "wheelchair": "limited",
+        "lit": "yes",
+        "operator": "Archaeological Survey of India"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/48192841",
+      "geometry": { "type": "Point", "coordinates": [73.8567, 18.5167] },
+      "properties": {
+        "name": "Dagdusheth Halwai Ganpati Temple",
+        "amenity": "place_of_worship",
+        "religion": "hindu",
+        "lit": "yes",
+        "surveillance": "yes",
+        "wheelchair": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/59281934",
+      "geometry": { "type": "Point", "coordinates": [73.9015, 18.5523] },
+      "properties": {
+        "name": "Aga Khan Palace",
+        "historic": "palace",
+        "tourism": "museum",
+        "heritage": "monument",
+        "lit": "yes",
+        "fee": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/67102948",
+      "geometry": { "type": "Point", "coordinates": [73.8461, 18.5283] },
+      "properties": {
+        "name": "Pataleshwar Cave Temple",
+        "historic": "archaeological_site",
+        "site_type": "rock_cut_temple",
+        "lit": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "node/78912345",
+      "geometry": { "type": "Point", "coordinates": [73.8245, 18.5118] },
+      "properties": {
+        "name": "Vetal Hill (Tekdi)",
+        "leisure": "nature_reserve",
+        "natural": "peak",
+        "lit": "no",
+        "surface": "unpaved"
+      }
+    }
+  ]
+}
