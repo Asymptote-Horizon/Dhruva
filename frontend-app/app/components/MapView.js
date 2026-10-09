@@ -98,5 +98,11 @@ export default function MapView({ places, city, onSelectPlace }) {
     };
   }, []);
 
-  return <div ref={mapRef} className={styles.mapWrap} />;
-}
+  return (
+    <div
+      ref={mapRef}
+      className={styles.mapWrap}
+      role="application"
+      aria-label="Interactive Leaflet map displaying city safety telemetry markers"
+    />
+  );

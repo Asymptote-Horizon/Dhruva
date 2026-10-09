@@ -181,34 +181,46 @@ export default function NormalMode({ onBack }) {
 
         {/* ── Explore Tab ── */}
         {tab === "explore" && (
-          <div className={styles.exploreTab}>
+          <div className={styles.exploreTab} role="region" aria-label="Explore places">
             <input
               className={styles.searchInput}
               placeholder="Search places..."
+              aria-label="Search places by name or category"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
-            <div className={styles.catRow}>
+            <div className={styles.catRow} role="toolbar" aria-label="Filter categories">
               {categories.map((cat) => (
                 <button
                   key={cat}
                   className={`${styles.catChip} ${cat === categoryFilter ? styles.catChipActive : ""}`}
+                  aria-pressed={cat === categoryFilter}
+                  aria-label={`Filter by ${cat}`}
                   onClick={() => setCategoryFilter(cat)}
                 >
                   {cat}
                 </button>
               ))}
             </div>
-            <div className={styles.placeList}>
+            <div className={styles.placeList} role="list" aria-label="Places list">
               {filteredPlaces.map((place) => (
                 <div
                   key={place.id}
+                  role="button"
+                  tabIndex={0}
+                  aria-label={`${place.name}, safety score ${place.safety_score} out of 100`}
                   className={`${styles.placeItem} ${selectedPlace?.id === place.id ? styles.placeItemActive : ""}`}
                   onClick={() => setSelectedPlace(place)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      setSelectedPlace(place);
+                    }
+                  }}
                 >
                   <img
                     src={place.image}
-                    alt={place.name}
+                    alt={`Scenic photograph of ${place.name}`}
                     className={styles.placeThumb}
                     loading="lazy"
                   />
@@ -230,13 +242,13 @@ export default function NormalMode({ onBack }) {
 
         {/* ── Chat Tab ── */}
         {tab === "chat" && (
-          <div className={styles.chatTab}>
+          <div className={styles.chatTab} role="region" aria-label="Dhruva AI Chat">
             <div className={styles.chatHeader}>
-              <span className={styles.chatAgentDot} />
+              <span className={styles.chatAgentDot} aria-hidden="true" />
               <span>Dhruva AI Oracle</span>
               <span className={styles.chatAgentTag}>Agentic</span>
             </div>
-            <div className={styles.chatMessages}>
+            <div className={styles.chatMessages} role="log" aria-live="polite">
               {chatMessages.map((msg, i) => (
                 <div
                   key={i}
@@ -246,8 +258,8 @@ export default function NormalMode({ onBack }) {
                 </div>
               ))}
               {chatLoading && (
-                <div className={`${styles.chatMsg} ${styles.chatBot}`}>
-                  <span className={styles.typingDots}>
+                <div className={`${styles.chatMsg} ${styles.chatBot}`} aria-label="Dhruva is typing">
+                  <span className={styles.typingDots} aria-hidden="true">
                     <span></span>
                     <span></span>
                     <span></span>
@@ -260,11 +272,16 @@ export default function NormalMode({ onBack }) {
               <input
                 className={styles.chatInputField}
                 placeholder="Ask Dhruva anything..."
+                aria-label="Type your message to Dhruva AI"
                 value={chatInput}
                 onChange={(e) => setChatInput(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && sendChat()}
               />
-              <button className={styles.chatSendBtn} onClick={sendChat}>
+              <button
+                className={styles.chatSendBtn}
+                onClick={sendChat}
+                aria-label="Send message to Dhruva AI"
+              >
                 →
               </button>
             </div>
@@ -273,13 +290,14 @@ export default function NormalMode({ onBack }) {
 
         {/* ── Compare Tab ── */}
         {tab === "compare" && (
-          <div className={styles.compareTab}>
+          <div className={styles.compareTab} role="region" aria-label="Compare places">
             <p className={styles.compareInfo}>
               Select two places to compare side-by-side.
             </p>
             <div className={styles.compareSelects}>
               <select
                 className={styles.compareSelect}
+                aria-label="Select first place to compare"
                 value={compareA?.id || ""}
                 onChange={(e) =>
                   setCompareA(places.find((p) => p.id === e.target.value) || null)
@@ -292,9 +310,10 @@ export default function NormalMode({ onBack }) {
                   </option>
                 ))}
               </select>
-              <span className={styles.vsText}>VS</span>
+              <span className={styles.vsText} aria-hidden="true">VS</span>
               <select
                 className={styles.compareSelect}
+                aria-label="Select second place to compare"
                 value={compareB?.id || ""}
                 onChange={(e) =>
                   setCompareB(places.find((p) => p.id === e.target.value) || null)

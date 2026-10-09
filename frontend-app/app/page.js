@@ -108,12 +108,21 @@ export default function Home() {
 
   /* ─── Landing / Mode Selector ─── */
   return (
-    <div className={`${styles.landing} ${fadeOut ? styles.fadeOut : ""}`}>
-      <canvas ref={canvasRef} className={styles.starCanvas} />
+    <main
+      role="main"
+      aria-label="Dhruva Urban Exploration Landing"
+      className={`${styles.landing} ${fadeOut ? styles.fadeOut : ""}`}
+    >
+      <canvas
+        ref={canvasRef}
+        className={styles.starCanvas}
+        role="img"
+        aria-label="Interactive starry cosmos background animation"
+      />
 
       {/* Pole Star SVG */}
-      <div className={styles.poleStar}>
-        <svg viewBox="0 0 100 100" fill="none" width="56" height="56">
+      <div className={styles.poleStar} aria-hidden="true">
+        <svg viewBox="0 0 100 100" fill="none" width="56" height="56" aria-hidden="true">
           <circle
             cx="50"
             cy="50"
@@ -142,13 +151,14 @@ export default function Home() {
           Choose your journey through the urban frontier.
         </p>
 
-        <div className={styles.modeSelector}>
+        <nav className={styles.modeSelector} aria-label="Exploration Modalities">
           <button
             className={`${styles.modeBtn} ${styles.gameBtn}`}
             onClick={() => selectMode("game")}
             id="btn-game-mode"
+            aria-label="Launch Ludic Odyssey Game Mode: Quests, XP, Leaderboards, 3D World"
           >
-            <span className={styles.modeIcon}>⚔️</span>
+            <span className={styles.modeIcon} aria-hidden="true">⚔️</span>
             <span className={styles.modeLabel}>Ludic Odyssey</span>
             <span className={styles.modeDesc}>
               Quests • XP • Leaderboards • 3D World
@@ -159,17 +169,18 @@ export default function Home() {
             className={`${styles.modeBtn} ${styles.normalBtn}`}
             onClick={() => selectMode("normal")}
             id="btn-normal-mode"
+            aria-label="Launch Zenith Cartography Normal Mode: Maps, AI Oracle, Safety Scores"
           >
-            <span className={styles.modeIcon}>🧭</span>
+            <span className={styles.modeIcon} aria-hidden="true">🧭</span>
             <span className={styles.modeLabel}>Zenith Cartography</span>
             <span className={styles.modeDesc}>
               Maps • AI Oracle • Safety Scores
             </span>
           </button>
-        </div>
+        </nav>
       </div>
 
-      <div className={styles.hint}>Your cursor is the torch. Move it.</div>
-    </div>
+      <div className={styles.hint} aria-live="polite">Your cursor is the torch. Move it.</div>
+    </main>
   );
 }
